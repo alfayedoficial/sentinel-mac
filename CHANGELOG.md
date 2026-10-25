@@ -4,6 +4,11 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-25
+
+### Changed
+- **Settings → Updates** now always has a **Check for updates** button (it used to disappear while an update was available), shows when it last checked, and has a separate **Update to x.y.z** button.
+
 ## [1.1.0] - 2026-10-25
 
 ### Added

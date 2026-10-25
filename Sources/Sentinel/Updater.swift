@@ -325,35 +325,83 @@ struct UpdatesCard: View {
     @ObservedObject private var updater = Updater.shared
     @AppStorage("autoUpdateCheck") private var auto = true
 
+    private var busy: Bool {
+        switch updater.state {
+        case .checking, .working: return true
+        default: return false
+        }
+    }
+
     var body: some View {
         Card {
-            Toggle("Check for updates automatically", isOn: $auto).toggleStyle(CheckToggleStyle())
-            HStack {
+            Text("Updates").font(.system(size: 12, weight: .semibold))
+            HStack(spacing: 10) {
+                Image(systemName: icon).font(.system(size: 20)).foregroundStyle(iconColor).frame(width: 26)
+                    .contentTransition(.symbolEffect(.replace))
                 VStack(alignment: .leading, spacing: 1) {
-                    Text(status).font(.system(size: 12, weight: .semibold))
-                    Text("Version \(updater.currentVersion) · checks GitHub Releases only").font(.system(size: 10.5)).foregroundStyle(Theme.t2)
+                    Text(status).font(.system(size: 12.5, weight: .semibold))
+                    Text(detail).font(.system(size: 10.5)).foregroundStyle(Theme.t2)
                 }
-                Spacer()
-                switch updater.state {
-                case .checking, .working: ProgressView().controlSize(.small)
-                case .available: Button("Update") { Task { await updater.install() } }.buttonStyle(.borderedProminent).tint(Theme.accentDeep).controlSize(.small)
-                default: Button("Check now") { Task { await updater.check() } }.controlSize(.small)
+                Spacer(minLength: 0)
+                if busy { ProgressView().controlSize(.small) }
+            }
+            HStack(spacing: 8) {
+                // always available, so you can check whenever you like
+                Button { Task { await updater.check() } } label: {
+                    Label("Check for updates", systemImage: "arrow.triangle.2.circlepath").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered).controlSize(.regular).disabled(busy)
+                if case .available(let info) = updater.state {
+                    Button { Task { await updater.install() } } label: {
+                        Label("Update to \(info.version)", systemImage: "arrow.down.circle.fill").frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent).tint(Theme.accentDeep).controlSize(.regular)
+                    .transition(.scale.combined(with: .opacity))
                 }
             }
-            Text("The only network request Sentinel makes is to api.github.com, to read the latest release. No personal data is sent.")
-                .font(.system(size: 10.5)).foregroundStyle(Theme.t2)
+            Toggle("Check for updates automatically", isOn: $auto).toggleStyle(CheckToggleStyle())
+            Text("The only network request Sentinel makes is to api.github.com, to read the latest release. No personal data is sent. Turn the automatic check off and Sentinel makes no requests unless you press the button.")
+                .font(.system(size: 10.5)).foregroundStyle(Theme.t2).fixedSize(horizontal: false, vertical: true)
         }
+        .animation(.spring(duration: 0.3), value: updater.state)
     }
 
     private var status: String {
         switch updater.state {
-        case .idle: return "Not checked yet"
-        case .checking: return "Checking…"
+        case .idle: return "Version \(updater.currentVersion)"
+        case .checking: return "Checking GitHub…"
         case .upToDate: return "You have the latest version"
         case .available(let i): return "Version \(i.version) is available"
         case .working(let t): return t
         case .failed: return "Could not check for updates"
         case .installFailed: return "The update was not installed"
+        }
+    }
+
+    private var detail: String {
+        switch updater.state {
+        case .failed(let m), .installFailed(let m): return m
+        default:
+            let when = updater.lastChecked.map { "checked " + $0.formatted(.relative(presentation: .named)) } ?? "not checked yet"
+            return "Installed: \(updater.currentVersion) · \(when)"
+        }
+    }
+
+    private var icon: String {
+        switch updater.state {
+        case .upToDate: return "checkmark.circle.fill"
+        case .available: return "arrow.down.circle.fill"
+        case .failed, .installFailed: return "exclamationmark.triangle.fill"
+        default: return "arrow.triangle.2.circlepath.circle"
+        }
+    }
+
+    private var iconColor: Color {
+        switch updater.state {
+        case .upToDate: return Theme.success
+        case .available: return Theme.accent
+        case .failed, .installFailed: return Theme.warning
+        default: return Theme.t2
         }
     }
 }

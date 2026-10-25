@@ -148,12 +148,12 @@ enum DemoData {
 
         // updater banner (sample)
         let up = Updater.shared
-        up.currentVersion = "1.0.0"
-        up.state = .available(ReleaseInfo(tag: "v1.1.0", version: "1.1.0",
-                                          notes: "Automatic updates from GitHub Releases.\nNew: Similar Photos and Similar Files.",
+        up.currentVersion = "1.1.0"
+        up.state = .available(ReleaseInfo(tag: "v1.1.1", version: "1.1.1",
+                                          notes: "Settings now always has a Check for updates button and shows when it last checked.",
                                           zipURL: URL(string: "https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip")!,
                                           checksumURL: nil, pageURL: URL(string: "https://github.com/alfayedoficial/sentinel-mac/releases/latest")!))
-        up.lastChecked = Date()
+        up.lastChecked = Date().addingTimeInterval(-120)
 
         // threat watch
         ThreatWatch.shared.threats = [

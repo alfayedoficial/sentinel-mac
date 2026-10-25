@@ -113,7 +113,7 @@ Either way, a small icon with your memory percentage appears in the menu bar. Cl
 
 From version 1.1.0 Sentinel keeps itself up to date. About 8 seconds after it starts, and then once a day, it asks GitHub whether a newer release exists. If so, a banner appears on the Overview screen with **Update**. It downloads `Sentinel.zip`, checks the SHA-256 checksum and the code signature, replaces itself (keeping the previous version in `~/Library/Application Support/Sentinel/previous`) and restarts.
 
-- Turn it off in **Settings → Check for updates automatically**. You can still press **Check now**.
+- **Settings → Updates** has a **Check for updates** button you can press any time, and a switch for the automatic check. With the switch off, Sentinel makes no network requests unless you press the button.
 - The request goes to `api.github.com` only and contains no personal data; see [SECURITY.md](SECURITY.md).
 - **Upgrading from 1.0.0?** That version cannot update itself. Download 1.1.0 once from the [releases page](https://github.com/alfayedoficial/sentinel-mac/releases/latest); from then on it updates automatically.
 

@@ -138,7 +138,7 @@ Sentinel can update itself from your GitHub Releases:
    - the unpacked app is Sentinel (`com.afapps.sentinel`), is **newer** than the running one, has a valid code signature and the same signing identity.
 4. It moves the running app aside (kept in `~/Library/Application Support/Sentinel/previous`), puts the new one in its place and restarts. If anything fails the old app stays untouched.
 
-Prereleases and drafts are ignored. If Sentinel is somewhere it cannot write, it tells you to download the update manually. The check can be switched off in **Settings → Check for updates automatically**.
+Prereleases and drafts are ignored. If Sentinel is somewhere it cannot write, it tells you to download the update manually. In **Settings → Updates** there is always a **Check for updates** button (with the time of the last check) and, when a newer version exists, **Update to x.y.z**. The automatic check can be switched off there; the button keeps working.
 
 ## Settings
 

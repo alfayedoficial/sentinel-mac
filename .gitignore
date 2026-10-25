@@ -1,0 +1,11 @@
+# build output
+.build/
+build/
+*.xcodeproj
+DerivedData/
+
+# macOS
+.DS_Store
+
+# personal notes that are not part of the project
+DESIGN_PROMPT.md

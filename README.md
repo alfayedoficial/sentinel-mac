@@ -12,7 +12,7 @@ It watches memory, battery and disk, finds apps you are not using, cleans old ca
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![CI](https://github.com/alfayedoficial/sentinel-mac/actions/workflows/ci.yml/badge.svg)](https://github.com/alfayedoficial/sentinel-mac/actions/workflows/ci.yml)
 
-[Website](https://alfayedoficial.github.io/sentinel-mac/) · [Features](docs/FEATURES.md) · [Architecture](docs/ARCHITECTURE.md) · [Development guide](docs/DEVELOPMENT.md) · [Roadmap](ROADMAP.md)
+[Website](https://alfayedoficial.github.io/sentinel-mac/) · [Download](https://github.com/alfayedoficial/sentinel-mac/releases/latest) · [Features](docs/FEATURES.md) · [Architecture](docs/ARCHITECTURE.md) · [Development guide](docs/DEVELOPMENT.md) · [Roadmap](ROADMAP.md)
 
 <img src="docs/images/overview-dark.png" width="300" alt="Sentinel overview screen"> &nbsp; <img src="docs/images/overview-light.png" width="300" alt="Sentinel overview in light mode">
 
@@ -77,21 +77,29 @@ More images are in [`docs/images`](docs/images). The visual design is described 
 
 ## Install
 
-Sentinel is built from source. There is no installer to download, so you know exactly what runs on your Mac.
+### Option 1: Download (no Xcode, no clone)
+
+1. Download **[Sentinel.zip](https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip)** (universal: Apple Silicon and Intel, about 2.5 MB). Older versions and the SHA-256 checksum are on the [releases page](https://github.com/alfayedoficial/sentinel-mac/releases).
+2. Unzip it and drag **Sentinel.app** into your **Applications** folder.
+3. **First open only:** macOS says it cannot check the app, because it is signed locally and not notarized. Right-click the app → **Open** → **Open**, or run:
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/Sentinel.app
+   ```
+
+### Option 2: Build from source
+
+You know exactly what runs on your Mac.
 
 ```bash
 git clone https://github.com/alfayedoficial/sentinel-mac.git
 cd sentinel-mac
 ./build.sh
-```
-
-`build.sh` builds the app and its helper, signs them locally, and installs **`~/Applications/Sentinel.app`**. Then open it:
-
-```bash
 open ~/Applications/Sentinel.app
 ```
 
-A small icon with your memory percentage appears in the menu bar. Click it to open Sentinel.
+No git? [Download the source as a zip](https://github.com/alfayedoficial/sentinel-mac/archive/refs/heads/main.zip), unzip it and run `./build.sh` in the folder. `build.sh` builds the app and its helper, signs them locally and installs **`~/Applications/Sentinel.app`**.
+
+Either way, a small icon with your memory percentage appears in the menu bar. Click it to open Sentinel.
 
 ### First-run permissions
 

@@ -86,10 +86,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
       <h1>Keep your Mac <span>fast, clean and safe.</span></h1>
       <p>Sentinel lives in your menu bar. It finds apps you are not using, cleans old caches, removes apps with all their data, and warns you about hidden programs such as crypto miners. Free and open source.</p>
       <div class="cta">
-        <a class="btn primary" href="#install">Get Sentinel</a>
+        <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip">⬇ Download for Mac</a>
         <a class="btn ghost" href="https://github.com/alfayedoficial/sentinel-mac">View on GitHub</a>
       </div>
-      <div class="badges"><span>macOS 14+</span><span>MIT license</span><span>No network, no tracking</span></div>
+      <div class="badges"><span>macOS 14+ · Apple Silicon &amp; Intel</span><span>MIT license</span><span>No network, no tracking</span></div>
     </div>
     <div class="shots">
       <img src="images/overview-dark.png" alt="Sentinel overview screen in dark mode">
@@ -139,18 +139,32 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
 
 <section id="install"><div class="wrap">
   <h2>Install</h2>
-  <p class="lead">Sentinel is built from source, so you know exactly what runs on your Mac. You need macOS 14+ and Xcode 15+ (or the Swift toolchain).</p>
-  <ol class="steps">
-    <li><div><strong>Clone and build</strong>
+  <p class="lead">Two ways to get Sentinel. Downloading is the quickest; building from source lets you read every line first.</p>
+  <div class="two">
+    <div class="card">
+      <h3>Option 1 · Download (no Xcode, no clone)</h3>
+      <p>A 2.5&nbsp;MB universal app for Apple Silicon and Intel, macOS 14 or newer.</p>
+      <p style="margin:16px 0"><a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip">⬇ Download Sentinel.zip</a></p>
+      <ol style="padding-left:20px;margin:0;color:var(--muted)">
+        <li>Double-click the zip, then drag <strong>Sentinel.app</strong> to <em>Applications</em>.</li>
+        <li><strong>First open only:</strong> macOS warns that it cannot check the app, because it is signed locally and not notarized. Right-click the app → <strong>Open</strong> → <strong>Open</strong>.</li>
+        <li>Or remove the warning in Terminal:
+<pre><button onclick="copyCode(this)">Copy</button><code>xattr -dr com.apple.quarantine /Applications/Sentinel.app</code></pre></li>
+      </ol>
+      <p style="font-size:14px;margin-top:12px">Verify the download: <a href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip.sha256">SHA-256 checksum</a> · <a href="https://github.com/alfayedoficial/sentinel-mac/releases/latest">all releases</a></p>
+    </div>
+    <div class="card">
+      <h3>Option 2 · Build from source</h3>
+      <p>Needs macOS 14+ and Xcode 15+ (or the Swift toolchain).</p>
 <pre><button onclick="copyCode(this)">Copy</button><code>git clone https://github.com/alfayedoficial/sentinel-mac.git
 cd sentinel-mac
-./build.sh</code></pre></div></li>
-    <li><div><strong>Open it</strong>
-<pre><button onclick="copyCode(this)">Copy</button><code>open ~/Applications/Sentinel.app</code></pre>
-A small icon with your memory percentage appears in the menu bar.</div></li>
-    <li><div><strong>Allow it once (optional)</strong><br>In System Settings → Login Items &amp; Extensions switch on <em>Sentinel</em>, so it can switch off system launch items without asking for your password each time, and tick <em>Open Sentinel at login</em> in its Settings.</div></li>
-  </ol>
-  <div class="note"><strong>Honest limits.</strong> Threat Watch is a lookout, not an antivirus: it knows common miner names, mining-pool arguments, deleted executables, unsigned heavy programs in temporary folders and suspicious launch items. The app is signed locally and not notarized; signed releases are on the roadmap.</div>
+./build.sh
+open ~/Applications/Sentinel.app</code></pre>
+      <p style="font-size:14px">No git? <a href="https://github.com/alfayedoficial/sentinel-mac/archive/refs/heads/main.zip">Download the source as a zip</a>, unzip it, and run <code>./build.sh</code> inside the folder.</p>
+    </div>
+  </div>
+  <p style="margin-top:22px"><strong>After opening:</strong> a small icon with your memory percentage appears in the menu bar. For the smoothest experience, open <em>System Settings → Login Items &amp; Extensions</em> and switch on <em>Sentinel</em> (so it can switch off system launch items without asking for your password each time), and tick <em>Open Sentinel at login</em> in its Settings tab.</p>
+  <div class="note"><strong>Honest limits.</strong> Threat Watch is a lookout, not an antivirus: it knows common miner names, mining-pool arguments, deleted executables, unsigned heavy programs in temporary folders and suspicious launch items. The app is signed locally and not notarized; Developer ID signing is on the <a href="https://github.com/alfayedoficial/sentinel-mac/issues/1">roadmap</a>.</div>
 </div></section>
 
 <section><div class="wrap">

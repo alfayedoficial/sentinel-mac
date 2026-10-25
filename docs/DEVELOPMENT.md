@@ -95,10 +95,19 @@ The website is a static page in `docs/index.html`, published with GitHub Pages f
 ## Releasing
 
 1. Update `CHANGELOG.md` and the version in `Info.plist`.
-2. Run `swift test` and `./build.sh`.
-3. Tag the commit: `git tag -a v1.1.0 -m "Sentinel 1.1.0" && git push --tags`.
+2. Run `swift test`.
+3. Build the universal download and its checksum:
+   ```bash
+   ./scripts/package.sh        # creates build/Sentinel.zip and build/Sentinel.zip.sha256
+   ```
+4. Tag and publish. Keep the asset name `Sentinel.zip`, because the website and README link to `releases/latest/download/Sentinel.zip`:
+   ```bash
+   git tag -a v1.1.0 -m "Sentinel 1.1.0" && git push --tags
+   gh release create v1.1.0 build/Sentinel.zip build/Sentinel.zip.sha256 --title "Sentinel 1.1.0" --notes-file notes.md
+   ```
+5. Put the SHA-256 in the release notes.
 
-Signed and notarized downloads are on the [roadmap](../ROADMAP.md); today the app is built from source.
+Signed and notarized downloads are on the [roadmap](../ROADMAP.md); today the app is signed locally.
 
 ## Troubleshooting
 

@@ -7,6 +7,13 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 ### Added
 - Nothing yet. Add your line here in your pull request.
 
+### Fixed
+- Threat Watch no longer flags Apple's update services, which macOS runs from a temporary staging folder.
+- A shell whose command line only mentions miner words is no longer reported unless it is also using heavy CPU.
+
+### Added
+- Direct download of a universal `Sentinel.zip` from the releases page, and `scripts/package.sh` to build it.
+
 ## [1.0.0] - 2026-10-25
 
 First public release.

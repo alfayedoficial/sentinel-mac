@@ -30,6 +30,8 @@ struct ToolsTab: View {
                     case .maintenance: MaintenanceView()
                     case .history: HistoryView()
                     case .threats: ThreatWatchView()
+                    case .similarPhotos: SimilarPhotosView(f: hub.photos)
+                    case .similarFiles: SimilarFilesView(f: hub.similarFiles)
                     }
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity))

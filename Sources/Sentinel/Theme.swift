@@ -70,7 +70,7 @@ enum Theme {
 
 /// Colored tile used behind tool and action icons.
 enum TileStyle {
-    case clean, trash, remove, startup, bigFiles, duplicates, lens, maintenance, history
+    case clean, trash, remove, startup, bigFiles, duplicates, lens, maintenance, history, photos, similarFiles
 
     private var pair: (UInt32, UInt32) {
         switch self {
@@ -83,6 +83,8 @@ enum TileStyle {
         case .lens: (0x7D8BFF, 0x5C4FE0)
         case .maintenance: (0xFFD25E, 0xE8A317)
         case .history: (0xA3ABC2, 0x646D86)
+        case .photos: (0xC4A1FF, 0x8A55E0)
+        case .similarFiles: (0x7CC4FF, 0x3B82E6)
         }
     }
 

@@ -444,7 +444,7 @@ final class DuplicateFinder: ObservableObject {
 // MARK: - Shared container for the tools
 
 enum ToolKind: String, Identifiable, CaseIterable {
-    case smart, uninstall, bigFiles, duplicates, spaceLens, startup, maintenance, history, threats
+    case smart, uninstall, bigFiles, duplicates, similarPhotos, similarFiles, spaceLens, startup, maintenance, history, threats
     var id: String { rawValue }
     var title: String {
         switch self {
@@ -457,6 +457,8 @@ enum ToolKind: String, Identifiable, CaseIterable {
         case .maintenance: "Maintenance"
         case .history: "History"
         case .threats: "Threat Watch"
+        case .similarPhotos: "Similar Photos"
+        case .similarFiles: "Similar Files"
         }
     }
     var blurb: String {
@@ -470,6 +472,8 @@ enum ToolKind: String, Identifiable, CaseIterable {
         case .maintenance: "Quick Mac fixes"
         case .history: "Restore what you cleaned"
         case .threats: "Miners & hidden programs"
+        case .similarPhotos: "Near-identical pictures"
+        case .similarFiles: "Copies and old versions"
         }
     }
     var icon: String {
@@ -483,6 +487,8 @@ enum ToolKind: String, Identifiable, CaseIterable {
         case .maintenance: "wrench.adjustable.fill"
         case .history: "clock.arrow.circlepath"
         case .threats: "shield.lefthalf.filled.badge.checkmark"
+        case .similarPhotos: "photo.on.rectangle.angled"
+        case .similarFiles: "doc.on.doc"
         }
     }
     var style: TileStyle {
@@ -496,6 +502,8 @@ enum ToolKind: String, Identifiable, CaseIterable {
         case .maintenance: .maintenance
         case .history: .history
         case .threats: .trash
+        case .similarPhotos: .photos
+        case .similarFiles: .similarFiles
         }
     }
 }
@@ -510,4 +518,6 @@ final class Hub: ObservableObject {
     let startup = StartupManager()
     let lens = SpaceLens()
     let dups = DuplicateFinder()
+    let photos = SimilarPhotoFinder()
+    let similarFiles = SimilarFileFinder()
 }

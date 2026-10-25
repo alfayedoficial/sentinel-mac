@@ -104,7 +104,7 @@ final class SimilarPhotoFinder: ObservableObject {
     @Published var status = ""
     @Published var message: String?
 
-    static let maxPhotos = 15_000
+    nonisolated static let maxPhotos = 15_000
     var reclaimable: Int64 { groups.flatMap { $0.items }.filter { remove.contains($0.id) }.reduce(0) { $0 + $1.size } }
 
     func scan() {

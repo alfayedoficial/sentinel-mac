@@ -109,6 +109,7 @@ struct OverviewTab: View {
         ZStack {
             ScrollView {
                 VStack(spacing: 14) {
+                    UpdateBanner()
                     Button { withAnimation(.spring) { tool = .smart; tab = .tools } } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "wand.and.stars").font(.system(size: 18, weight: .semibold)).foregroundStyle(.white)
@@ -754,6 +755,7 @@ struct SettingsTab: View {
                         catch { launchAtLogin = SMAppService.mainApp.status == .enabled }
                     })).toggleStyle(CheckToggleStyle())
                 }
+                UpdatesCard()
                 Card {
                     Text("When is an app “unused”?").font(.system(size: 12, weight: .semibold))
                     SliderRow(title: "Idle for", value: $idle, range: 5...120, step: 5, unit: "min")

@@ -49,7 +49,9 @@ section{padding:56px 0} section h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 8
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
 .card h3{margin:10px 0 6px;font-size:17px} .card p{margin:0;color:var(--muted);font-size:15px}
-.ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:20px;color:#fff}
+.ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff}
+.ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn svg{width:16px;height:16px;flex:none}
 .gallery{display:flex;gap:18px;overflow-x:auto;padding:6px 4px 24px;scroll-snap-type:x mandatory}
 .gallery figure{margin:0;flex:0 0 auto;scroll-snap-align:start;width:260px}
 .gallery img{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -78,7 +80,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
   <a class="brand" href="#top"><img src="images/app-icon.png" alt="">Sentinel</a>
   <div class="links">
     <a href="#features">Features</a><a href="#screens">Screenshots</a><a href="#install">Install</a><a href="#contribute">Contribute</a>
-    <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac">★ GitHub</a>
+    <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.8l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.6l-5.9 3.2 1.2-6.5L2.5 9.7l6.6-.9Z"/></svg>GitHub</a>
   </div>
 </div></nav>
 
@@ -89,7 +91,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
       <h1>Keep your Mac <span>fast, clean and safe.</span></h1>
       <p>Sentinel lives in your menu bar. It finds apps you are not using, cleans old caches, removes apps with all their data, and warns you about hidden programs such as crypto miners. Free and open source.</p>
       <div class="cta">
-        <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip">⬇ Download for Mac</a>
+        <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download for Mac</a>
         <a class="btn ghost" href="https://github.com/alfayedoficial/sentinel-mac">View on GitHub</a>
       </div>
       <div class="badges"><span>macOS 14+ · Apple Silicon &amp; Intel</span><span>MIT license</span><span>No tracking · no accounts</span></div>
@@ -105,21 +107,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
   <h2>Everything in one small menu</h2>
   <p class="lead">Powerful tools, but nothing happens until you have seen the list and said yes. Everything goes to the Trash and can be restored.</p>
   <div class="grid">
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#7D8BFF,#5C4FE0)">◔</div><h3>Live monitor</h3><p>Memory, battery and disk rings, plus the apps using the most memory.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFAE4D,#F08A24)">⏻</div><h3>Idle app detection</h3><p>A popup tells you which background apps are unused, why, and lets you quit them.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#6C7BFF,#2F55D8)">✦</div><h3>Cache cleaner</h3><p>Find caches untouched for a week up to a year. Review the report, then clean.</p></div>
-    <div class="card"><div class="ico" style="background:var(--grad)">✧</div><h3>Smart Care</h3><p>One scan for caches, Trash, big files, startup items and idle apps.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFAE4D,#F08A24)">✕</div><h3>Uninstaller</h3><p>Remove an app together with its caches, preferences and containers.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FF7A93,#E0456B)">❐</div><h3>Duplicate finder</h3><p>Compares real file contents, keeps one copy, trashes the rest.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#6FD8E6,#2FB5C9)">◐</div><h3>Space Lens &amp; big files</h3><p>See what fills your disk and find large files you forgot.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#5EDB7A,#34B955)">⚡</div><h3>Startup Manager</h3><p>Login items and helpers. Flags broken leftovers and suspicious ones.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FF6B63,#E0453D)">⚠</div><h3>Threat Watch</h3><p>Spots crypto miners and hidden background programs, and stops them in one click.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFD25E,#E8A317)">⚙</div><h3>Maintenance</h3><p>Restart Dock or Finder, fix "Open With", reset Quick Look, flush DNS.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#A3ABC2,#646D86)">↺</div><h3>History &amp; Restore</h3><p>A log of everything cleaned, with one-click restore from the Trash.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#C4A1FF,#8A55E0)">▣</div><h3>Similar photos</h3><p>Finds near-identical pictures (resized, re-saved, edited), marks the sharpest as Best and lets you choose.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#7CC4FF,#3B82E6)">❏</div><h3>Similar files</h3><p>Spots copies and old versions like "Report (1).pdf" or "Budget-v2.xlsx". You decide what goes.</p></div>
-    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#3F6BFF,#8B5CF6)">⬇</div><h3>Automatic updates</h3><p>Checks GitHub Releases, verifies the download and installs the new version in seconds. Can be switched off.</p></div>
-    <div class="card"><div class="ico" style="background:var(--grad)">☾</div><h3>Light &amp; dark</h3><p>Native look, smooth animations, light on memory and CPU.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#7D8BFF,#5C4FE0)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0M12 15l4-5"/></svg></div><h3>Live monitor</h3><p>Memory, battery and disk rings, plus the apps using the most memory.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFAE4D,#F08A24)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Idle app detection</h3><p>A popup tells you which background apps are unused, why, and lets you quit them.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#6C7BFF,#2F55D8)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/></svg></div><h3>Cache cleaner</h3><p>Find caches untouched for a week up to a year. Review the report, then clean.</p></div>
+    <div class="card"><div class="ico" style="background:var(--grad)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 14 10M13 4.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1ZM18.5 12l.7 1.3 1.3.7-1.3.7-.7 1.3-.7-1.3-1.3-.7 1.3-.7Z"/></svg></div><h3>Smart Care</h3><p>One scan for caches, Trash, big files, startup items and idle apps.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFAE4D,#F08A24)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5zM9 9l6 6M15 9l-6 6"/></svg></div><h3>Uninstaller</h3><p>Remove an app together with its caches, preferences and containers.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FF7A93,#E0456B)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16V5h11"/></svg></div><h3>Duplicate finder</h3><p>Compares real file contents, keeps one copy, trashes the rest.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#6FD8E6,#2FB5C9)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9h9a9 9 0 1 1-9-9ZM15 3a9 9 0 0 1 6 6h-6Z"/></svg></div><h3>Space Lens &amp; big files</h3><p>See what fills your disk and find large files you forgot.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#5EDB7A,#34B955)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9M6.3 6.8a8 8 0 1 0 11.4 0"/></svg></div><h3>Startup Manager</h3><p>Login items and helpers. Flags broken leftovers and suspicious ones.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FF6B63,#E0453D)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5.5c0 4.3-2.9 7.5-7 9.5-4.1-2-7-5.2-7-9.5V6Z"/><path d="M12 9v4M12 16v.01"/></svg></div><h3>Threat Watch</h3><p>Spots crypto miners and hidden background programs, and stops them in one click.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFD25E,#E8A317)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17v3h3l5.2-5.2a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.5-.5-.5-2.5Z"/></svg></div><h3>Maintenance</h3><p>Restart Dock or Finder, fix "Open With", reset Quick Look, flush DNS.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#A3ABC2,#646D86)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 8v4l3 2"/></svg></div><h3>History &amp; Restore</h3><p>A log of everything cleaned, with one-click restore from the Trash.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#C4A1FF,#8A55E0)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m21 16-5-5-9 8"/></svg></div><h3>Similar photos</h3><p>Finds near-identical pictures (resized, re-saved, edited), marks the sharpest as Best and lets you choose.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#7CC4FF,#3B82E6)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/></svg></div><h3>Similar files</h3><p>Spots copies and old versions like "Report (1).pdf" or "Budget-v2.xlsx". You decide what goes.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#3F6BFF,#8B5CF6)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></div><h3>Automatic updates</h3><p>Checks GitHub Releases, verifies the download and installs the new version in seconds. Can be switched off.</p></div>
+    <div class="card"><div class="ico" style="background:var(--grad)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></div><h3>Light &amp; dark</h3><p>Native look, smooth animations, light on memory and CPU.</p></div>
   </div>
 </div></section>
 
@@ -153,7 +155,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
     <div class="card">
       <h3>Option 1 · Download (no Xcode, no clone)</h3>
       <p>A 2.5&nbsp;MB universal app for Apple Silicon and Intel, macOS 14 or newer.</p>
-      <p style="margin:16px 0"><a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip">⬇ Download Sentinel.zip</a></p>
+      <p style="margin:16px 0"><a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download Sentinel.zip</a></p>
       <ol style="padding-left:20px;margin:0;color:var(--muted)">
         <li>Double-click the zip, then drag <strong>Sentinel.app</strong> to <em>Applications</em>.</li>
         <li><strong>First open only:</strong> macOS warns that it cannot check the app, because it is signed locally and not notarized. Right-click the app → <strong>Open</strong> → <strong>Open</strong>.</li>
@@ -199,7 +201,7 @@ open ~/Applications/Sentinel.app</code></pre>
     <tr><td>Report a bug or a false alarm</td><td><a href="https://github.com/alfayedoficial/sentinel-mac/issues/new/choose">Open an issue</a></td></tr>
   </table>
   <div class="cta" style="margin-top:26px">
-    <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac">★ Star on GitHub</a>
+    <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.8l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.6l-5.9 3.2 1.2-6.5L2.5 9.7l6.6-.9Z"/></svg>Star on GitHub</a>
     <a class="btn ghost" href="https://github.com/alfayedoficial/sentinel-mac/issues?q=is%3Aissue+label%3Aenhancement">Browse ideas</a>
   </div>
 </div></section>

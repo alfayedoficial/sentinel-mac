@@ -14,7 +14,7 @@ enum Snapshot {
             ("settings", .settings, nil), ("smart-care", .tools, .smart), ("uninstaller", .tools, .uninstall),
             ("big-files", .tools, .bigFiles), ("duplicates", .tools, .duplicates), ("space-lens", .tools, .spaceLens),
             ("startup", .tools, .startup), ("maintenance", .tools, .maintenance), ("history", .tools, .history),
-            ("threat-watch", .tools, .threats),
+            ("threat-watch", .tools, .threats), ("similar-photos", .tools, .similarPhotos), ("similar-files", .tools, .similarFiles),
         ]
         for (name, tab, tool) in screens {
             await render(MainView(tab: tab, tool: tool), size: CGSize(width: 400, height: 580), dark: true, to: dir.appendingPathComponent("\(name)-dark.png"))

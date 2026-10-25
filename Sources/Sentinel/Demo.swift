@@ -121,6 +121,40 @@ enum DemoData {
             HistoryEntry(date: h.addingTimeInterval(-90000), kind: "Big old file", name: "old-backup.zip", originalPath: "/x", trashedPath: "/t/d", size: 1_850 * 1_048_576, restored: true),
         ])
 
+        // similar photos (generated pictures, so no real photo is ever shown)
+        func photo(_ name: String, w: Int, h: Int, mb: Double, days: Double, hash: UInt64, seed: Int, tweak: Double) -> SimilarPhoto {
+            let u = path("Pictures/\(name)")
+            Thumbs.shared.demo[u.path] = DemoImages.scene(seed: seed, tweak: tweak)
+            return SimilarPhoto(url: u, size: Int64(mb * 1_048_576), width: w, height: h, modified: Date().addingTimeInterval(-days * 86400), hash: hash)
+        }
+        let pg1 = SimilarGroup(id: "p1", items: [photo("IMG_2041.jpg", w: 4032, h: 3024, mb: 3.8, days: 40, hash: 1, seed: 1, tweak: 0),
+                                                photo("IMG_2041 (1).jpg", w: 2016, h: 1512, mb: 0.9, days: 38, hash: 2, seed: 1, tweak: 0.18),
+                                                photo("IMG_2042.jpg", w: 4032, h: 3024, mb: 3.6, days: 40, hash: 3, seed: 1, tweak: -0.12)])
+        let pg2 = SimilarGroup(id: "p2", items: [photo("sunset-final.png", w: 3000, h: 2000, mb: 6.1, days: 90, hash: 4, seed: 2, tweak: 0),
+                                                photo("sunset-final-edit.jpg", w: 3000, h: 2000, mb: 1.2, days: 60, hash: 5, seed: 2, tweak: 0.25)])
+        hub.photos.groups = [pg1, pg2]
+        hub.photos.remove = Set([pg1.items[1], pg1.items[2], pg2.items[1]].map { $0.id })
+        hub.photos.done = true
+
+        // similar files
+        func sf(_ n: String, _ folder: String, kb: Int64, days: Double) -> SimilarFile {
+            SimilarFile(url: path("\(folder)/\(n)"), size: kb * 1024, modified: Date().addingTimeInterval(-days * 86400))
+        }
+        hub.similarFiles.groups = [
+            SimilarFileGroup(id: "quarterly-report.pdf", items: [sf("Quarterly-Report-final.pdf", "Documents", kb: 4200, days: 3), sf("Quarterly-Report (1).pdf", "Downloads", kb: 4100, days: 20), sf("Quarterly-Report copy.pdf", "Desktop", kb: 3900, days: 55)]),
+            SimilarFileGroup(id: "budget.xlsx", items: [sf("Budget-v3.xlsx", "Documents", kb: 860, days: 9), sf("Budget-v2.xlsx", "Documents", kb: 840, days: 30), sf("Budget-v1.xlsx", "Documents", kb: 800, days: 70)]),
+        ]
+        hub.similarFiles.done = true
+
+        // updater banner (sample)
+        let up = Updater.shared
+        up.currentVersion = "1.0.0"
+        up.state = .available(ReleaseInfo(tag: "v1.1.0", version: "1.1.0",
+                                          notes: "Automatic updates from GitHub Releases.\nNew: Similar Photos and Similar Files.",
+                                          zipURL: URL(string: "https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip")!,
+                                          checksumURL: nil, pageURL: URL(string: "https://github.com/alfayedoficial/sentinel-mac/releases/latest")!))
+        up.lastChecked = Date()
+
         // threat watch
         ThreatWatch.shared.threats = [
             Threat(id: "p1", pid: 4242, pids: [4242], name: "xmrig", path: "/private/tmp/.cache/xmrig", cpu: 187, severity: .high,
@@ -133,5 +167,32 @@ enum DemoData {
             OutsideProc(id: "o3", name: "node", path: "/usr/local/bin/node", cpu: 0, sign: .developer),
         ]
         ThreatWatch.shared.lastScan = Date()
+    }
+}
+
+/// Pictures drawn in code for the screenshots (a sky, a sun and hills), so no real photo is ever used.
+enum DemoImages {
+    static func scene(seed: Int, tweak: Double) -> NSImage {
+        let size = NSSize(width: 220, height: 220)
+        let img = NSImage(size: size)
+        img.lockFocus()
+        let palettes: [[NSColor]] = [
+            [NSColor(red: 0.98, green: 0.62, blue: 0.35, alpha: 1), NSColor(red: 0.45, green: 0.35, blue: 0.75, alpha: 1)],
+            [NSColor(red: 0.99, green: 0.78, blue: 0.40, alpha: 1), NSColor(red: 0.85, green: 0.30, blue: 0.45, alpha: 1)],
+        ]
+        let p = palettes[(seed - 1) % palettes.count]
+        let t = CGFloat(tweak)
+        NSGradient(starting: p[0].blended(withFraction: max(0, t), of: .white) ?? p[0], ending: p[1].blended(withFraction: max(0, -t), of: .black) ?? p[1])?
+            .draw(in: NSRect(origin: .zero, size: size), angle: 90)
+        NSColor(white: 1, alpha: 0.9).setFill()
+        NSBezierPath(ovalIn: NSRect(x: 120 + t * 20, y: 120, width: 56, height: 56)).fill()
+        NSColor(red: 0.12, green: 0.14, blue: 0.28, alpha: 0.9).setFill()
+        let hills = NSBezierPath()
+        hills.move(to: NSPoint(x: 0, y: 0)); hills.line(to: NSPoint(x: 0, y: 70))
+        hills.curve(to: NSPoint(x: 110, y: 60), controlPoint1: NSPoint(x: 40, y: 110), controlPoint2: NSPoint(x: 70, y: 30))
+        hills.curve(to: NSPoint(x: 220, y: 80), controlPoint1: NSPoint(x: 150, y: 90), controlPoint2: NSPoint(x: 190, y: 40))
+        hills.line(to: NSPoint(x: 220, y: 0)); hills.close(); hills.fill()
+        img.unlockFocus()
+        return img
     }
 }

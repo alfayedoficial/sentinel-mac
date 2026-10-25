@@ -62,7 +62,10 @@ enum ThreatRules {
     static var extraKnownHidden: Set<String> {
         Set((UserDefaults.standard.stringArray(forKey: "threatKnownHidden") ?? []).map { $0.lowercased() })
     }
-    static let trustedApplePrefixes = ["/System/", "/usr/bin/", "/usr/sbin/", "/usr/libexec/", "/bin/", "/sbin/", "/Library/Apple/"]
+    /// Apple-owned locations. `/private/var/db/com.apple.*` is where macOS stages update services and deletes them after launch,
+    /// so a "missing" executable there is normal.
+    static let trustedApplePrefixes = ["/System/", "/usr/bin/", "/usr/sbin/", "/usr/libexec/", "/bin/", "/sbin/", "/Library/Apple/",
+                                       "/private/var/db/com.apple.", "/var/db/com.apple."]
     static let trustedDevPrefixes = ["/Applications/", "/opt/homebrew/", "/usr/local/", "/Library/Developer/", "/Library/Java/"]
     static let trustedDevFragments = ["/Library/Java/", "/.gradle/", "/.konan/", "/.sdkman/", "/Xcode.app/", "/.cargo/", "/.nvm/", "/.rustup/"]
 

@@ -53,6 +53,12 @@ final class ThreatRulesTests: XCTestCase {
         XCTAssertNil(ThreatRules.evaluate(proc("/usr/bin/vim", args: ["vim", "notes.txt"], sign: .apple)))
     }
 
+    /// Regression: macOS runs update services from a staging folder and deletes them, which looked like malware.
+    func testAppleUpdateStagingFolderIsNotFlagged() {
+        let staged = "/private/var/db/com.apple.xpc.roleaccountd.staging/exec/1.2.xpc/Contents/MacOS/com.apple.NRD.UpdateBrainService"
+        XCTAssertNil(ThreatRules.evaluate(proc(staged, sign: .unknown, exists: false)))
+    }
+
     func testDeletedExecutableIsHighRisk() {
         XCTAssertEqual(ThreatRules.evaluate(proc("/tmp/a/evil", exists: false))?.severity, .high)
         XCTAssertNil(ThreatRules.evaluate(proc("/usr/bin/gone", sign: .apple, exists: false)), "system paths are not judged on existence")
@@ -143,6 +149,7 @@ final class ThreatScannerTests: XCTestCase {
         let fake = try fakeProgram(named: "xmrig", in: sb)
         let p = try start(fake.path, ["30"])
         defer { p.terminate() }
+        guard p.isRunning else { throw XCTSkip("this machine does not allow running a re-signed copy of a system binary") }
         let result = ThreatScanner().scan(allowed: [])
         let hit = result.threats.first { $0.pids.contains(p.processIdentifier) }
         XCTAssertNotNil(hit, "the scanner must report the fake miner")

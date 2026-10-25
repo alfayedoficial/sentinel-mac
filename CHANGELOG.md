@@ -4,15 +4,23 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-25
+
 ### Added
-- Nothing yet. Add your line here in your pull request.
+- **Automatic updates** from GitHub Releases: a daily check, an **Update** banner with release notes, a verified download (HTTPS from GitHub only, SHA-256 checksum, code-signature and identity check, newer-version check), a safe swap that keeps the previous version, and a restart. Can be switched off in Settings. `--install-update` does it from a script.
+- **Similar Photos**: perceptual hashing finds resized, re-saved or lightly edited copies, marks the sharpest as *Best*, with Very close / Similar / Loose sensitivity.
+- **Similar Files**: finds copies and old versions by name (`Report (1).pdf`, `Budget-v2.xlsx`), with nothing pre-selected.
+- Direct download of a universal `Sentinel.zip` from the releases page, and `scripts/package.sh` to build it.
+- 30+ new tests (100+ in total), including real signed and tampered look-alike apps for the update checks.
+
+### Changed
+- The app now makes one network request: the optional update check. The documentation, website and security policy say so.
+- The privileged helper only registers itself when Sentinel runs from an Applications folder, so a copy in `/tmp` or a build folder never adds a background item.
 
 ### Fixed
 - Threat Watch no longer flags Apple's update services, which macOS runs from a temporary staging folder.
 - A shell whose command line only mentions miner words is no longer reported unless it is also using heavy CPU.
-
-### Added
-- Direct download of a universal `Sentinel.zip` from the releases page, and `scripts/package.sh` to build it.
+- Website: install cards no longer overflow and code blocks no longer hide under the Copy button.
 
 ## [1.0.0] - 2026-10-25
 

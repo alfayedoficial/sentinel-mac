@@ -92,7 +92,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
         <a class="btn primary" href="https://github.com/alfayedoficial/sentinel-mac/releases/latest/download/Sentinel.zip">⬇ Download for Mac</a>
         <a class="btn ghost" href="https://github.com/alfayedoficial/sentinel-mac">View on GitHub</a>
       </div>
-      <div class="badges"><span>macOS 14+ · Apple Silicon &amp; Intel</span><span>MIT license</span><span>No network, no tracking</span></div>
+      <div class="badges"><span>macOS 14+ · Apple Silicon &amp; Intel</span><span>MIT license</span><span>No tracking · no accounts</span></div>
     </div>
     <div class="shots">
       <img src="images/overview-dark.png" alt="Sentinel overview screen in dark mode">
@@ -116,6 +116,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
     <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FF6B63,#E0453D)">⚠</div><h3>Threat Watch</h3><p>Spots crypto miners and hidden background programs, and stops them in one click.</p></div>
     <div class="card"><div class="ico" style="background:linear-gradient(135deg,#FFD25E,#E8A317)">⚙</div><h3>Maintenance</h3><p>Restart Dock or Finder, fix "Open With", reset Quick Look, flush DNS.</p></div>
     <div class="card"><div class="ico" style="background:linear-gradient(135deg,#A3ABC2,#646D86)">↺</div><h3>History &amp; Restore</h3><p>A log of everything cleaned, with one-click restore from the Trash.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#C4A1FF,#8A55E0)">▣</div><h3>Similar photos</h3><p>Finds near-identical pictures (resized, re-saved, edited), marks the sharpest as Best and lets you choose.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#7CC4FF,#3B82E6)">❏</div><h3>Similar files</h3><p>Spots copies and old versions like "Report (1).pdf" or "Budget-v2.xlsx". You decide what goes.</p></div>
+    <div class="card"><div class="ico" style="background:linear-gradient(135deg,#3F6BFF,#8B5CF6)">⬇</div><h3>Automatic updates</h3><p>Checks GitHub Releases, verifies the download and installs the new version in seconds. Can be switched off.</p></div>
     <div class="card"><div class="ico" style="background:var(--grad)">☾</div><h3>Light &amp; dark</h3><p>Native look, smooth animations, light on memory and CPU.</p></div>
   </div>
 </div></section>
@@ -132,6 +135,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
     <figure><img loading="lazy" src="images/duplicates-dark.png" alt="Duplicates"><figcaption>Duplicates</figcaption></figure>
     <figure><img loading="lazy" src="images/startup-dark.png" alt="Startup Manager"><figcaption>Startup Manager</figcaption></figure>
     <figure><img loading="lazy" src="images/history-dark.png" alt="History"><figcaption>History &amp; Restore</figcaption></figure>
+    <figure><img loading="lazy" src="images/similar-photos-dark.png" alt="Similar photos"><figcaption>Similar photos</figcaption></figure>
+    <figure><img loading="lazy" src="images/similar-files-dark.png" alt="Similar files"><figcaption>Similar files</figcaption></figure>
+    <figure><img loading="lazy" src="images/overview-dark.png" alt="Update available banner"><figcaption>Automatic updates</figcaption></figure>
     <figure><img loading="lazy" src="images/overview-light.png" alt="Light mode"><figcaption>Light mode</figcaption></figure>
   </div>
   <div class="popups">
@@ -166,14 +172,15 @@ open ~/Applications/Sentinel.app</code></pre>
       <p style="font-size:14px">No git? <a href="https://github.com/alfayedoficial/sentinel-mac/archive/refs/heads/main.zip">Download the source as a zip</a>, unzip it, and run <code>./build.sh</code> inside the folder.</p>
     </div>
   </div>
-  <p style="margin-top:22px"><strong>After opening:</strong> a small icon with your memory percentage appears in the menu bar. For the smoothest experience, open <em>System Settings → Login Items &amp; Extensions</em> and switch on <em>Sentinel</em> (so it can switch off system launch items without asking for your password each time), and tick <em>Open Sentinel at login</em> in its Settings tab.</p>
+  <p style="margin-top:22px"><strong>Updates:</strong> from version 1.1.0 Sentinel updates itself from GitHub Releases (verified checksum and signature, one click, can be switched off in Settings). Running 1.0.0? Download 1.1.0 once; it cannot update itself.</p>
+  <p><strong>After opening:</strong> a small icon with your memory percentage appears in the menu bar. For the smoothest experience, open <em>System Settings → Login Items &amp; Extensions</em> and switch on <em>Sentinel</em> (so it can switch off system launch items without asking for your password each time), and tick <em>Open Sentinel at login</em> in its Settings tab.</p>
   <div class="note"><strong>Honest limits.</strong> Threat Watch is a lookout, not an antivirus: it knows common miner names, mining-pool arguments, deleted executables, unsigned heavy programs in temporary folders and suspicious launch items. The app is signed locally and not notarized; Developer ID signing is on the <a href="https://github.com/alfayedoficial/sentinel-mac/issues/1">roadmap</a>.</div>
 </div></section>
 
 <section><div class="wrap">
   <h2>Privacy and safety</h2>
   <div class="two">
-    <div class="card"><h3>Nothing leaves your Mac</h3><p>No network connections, accounts, analytics or telemetry. History stays in a local file.</p></div>
+    <div class="card"><h3>Nothing leaves your Mac</h3><p>No accounts, analytics or telemetry. The only network request is an optional update check against GitHub Releases, which you can switch off.</p></div>
     <div class="card"><h3>Review, then confirm</h3><p>Every clean-up shows a list first. Items go to the Trash and can be restored from History.</p></div>
     <div class="card"><h3>A tiny, locked-down helper</h3><p>The optional root helper can only switch off third-party launch items in two folders. It refuses Apple items and path tricks, and it never deletes.</p></div>
     <div class="card"><h3>Open source</h3><p>MIT licensed. Read every line, change it, share it.</p></div>

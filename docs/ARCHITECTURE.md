@@ -17,7 +17,7 @@ Sentinel is a Swift Package with three targets. There is no Xcode project; every
 | `Sentinel` | executable | The whole app: monitoring, scanners, tools, UI. |
 | `SentinelHelper` | executable | Tiny root daemon. It only switches off third-party launch items. |
 | `SentinelCommon` | library | The XPC protocol and `HelperPolicy`, the rules the helper enforces. Shared so the rules can be unit-tested. |
-| `SentinelTests` | tests | 72 unit tests for rules, scanners, history and the helper policy. |
+| `SentinelTests` | tests | 100+ unit tests for rules, scanners, history, updates, similar-photo hashing and the helper policy. |
 
 ## Source map (`Sources/Sentinel`)
 
@@ -32,6 +32,8 @@ Sentinel is a Swift Package with three targets. There is no Xcode project; every
 | `Features.swift` | Startup Manager, Space Lens, Duplicate Finder, `ToolKind`, the shared `Hub`. |
 | `More.swift` | History log, Maintenance tasks, weekly reminder. |
 | `PrivilegedHelper.swift` | Client side of the helper (registration and XPC calls). |
+| `Updater.swift` | `UpdateLogic` (pure, tested: versions, release parsing, checksum, bundle validation, swap), `Updater` (state) and the update banner. |
+| `Similar.swift` | Perceptual photo hashing and clustering, similar-file families, thumbnails and both screens. |
 | `Views.swift`, `ToolsViews.swift`, `AlertPanel.swift` | SwiftUI screens and the floating popup. |
 | `Theme.swift` | Design tokens, logo shapes, shared controls. |
 | `Models.swift` | Small value types and formatters. |
@@ -67,6 +69,17 @@ scan (background) ─▶ report (user reviews, can untick) ─▶ confirm card �
 ```
 
 `Trasher.trash` is the single place that moves things to the Trash. It falls back to Finder for items macOS protects and always records the original and Trash locations so **Restore** works.
+
+## Updates and the network
+
+Sentinel makes **one** kind of network request: the update check. It is a `GET` to the GitHub Releases API (and, on request, a download of `Sentinel.zip` and its checksum from GitHub's hosts). The fetch function is injectable, so tests never touch the network.
+
+```
+Timer (daily) / "Check now" ──▶ GET /releases/latest ──▶ UpdateLogic.parseRelease ──▶ .available
+Update ──▶ download zip ──▶ sha256 == published checksum ──▶ ditto -x ──▶ validateBundle ──▶ swap ──▶ relaunch
+```
+
+`UpdateLogic.validateBundle` is the gate: right bundle id, newer version, valid code signature, same signing identity. `UpdateLogic.swap` keeps the old app so a failure restores it. A real-network test runs with `SENTINEL_NETWORK_TESTS=1`.
 
 ## The privileged helper
 

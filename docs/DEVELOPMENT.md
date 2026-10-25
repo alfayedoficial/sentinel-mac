@@ -94,18 +94,27 @@ The website is a static page in `docs/index.html`, published with GitHub Pages f
 
 ## Releasing
 
-1. Update `CHANGELOG.md` and the version in `Info.plist`.
+Automatic updates read your GitHub Releases, so a release must follow a few rules or installed apps will ignore or refuse it.
+
+1. **Bump the version** in `Info.plist` (`CFBundleShortVersionString`, and `CFBundleVersion` by one). The tag must match: `v1.2.0` for `1.2.0`. Update `CHANGELOG.md`.
 2. Run `swift test`.
 3. Build the universal download and its checksum:
    ```bash
    ./scripts/package.sh        # creates build/Sentinel.zip and build/Sentinel.zip.sha256
    ```
-4. Tag and publish. Keep the asset name `Sentinel.zip`, because the website and README link to `releases/latest/download/Sentinel.zip`:
+4. Publish. The asset names **must be exactly** `Sentinel.zip` and `Sentinel.zip.sha256`; the updater and the website link depend on them:
    ```bash
-   git tag -a v1.1.0 -m "Sentinel 1.1.0" && git push --tags
-   gh release create v1.1.0 build/Sentinel.zip build/Sentinel.zip.sha256 --title "Sentinel 1.1.0" --notes-file notes.md
+   git tag -a v1.2.0 -m "Sentinel 1.2.0" && git push --tags
+   gh release create v1.2.0 build/Sentinel.zip build/Sentinel.zip.sha256 --title "Sentinel 1.2.0" --notes-file notes.md
    ```
+   The release notes are shown to users under **What's new**. Do not mark it as a draft or prerelease: those are ignored.
 5. Put the SHA-256 in the release notes.
+
+### Testing the update path
+
+- Unit tests (`UpdaterTests.swift`) cover version comparison, release parsing, the checksum, signed, unsigned and tampered look-alike apps, and the swap with roll-back.
+- Against the real release: `SENTINEL_NETWORK_TESTS=1 swift test --filter testRealLatestRelease`.
+- End to end: build a copy with a lower version in `Info.plist` into a temporary folder and run `Sentinel.app/Contents/MacOS/Sentinel --install-update`. It checks GitHub, installs the newer release over itself and restarts. Copies outside an Applications folder never register the background helper.
 
 Signed and notarized downloads are on the [roadmap](../ROADMAP.md); today the app is signed locally.
 

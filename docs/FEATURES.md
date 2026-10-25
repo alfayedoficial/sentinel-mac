@@ -58,6 +58,30 @@ Files above a size you choose (100 MB to 1 GB) that were not modified for the ra
 
 Only byte-identical files are reported. The oldest copy is kept by default; tap any file to choose which copy to keep. Symbolic links and `node_modules` are ignored.
 
+## Similar Photos
+
+Finds pictures that look the same even though the files are different: resized, saved in another format, re-compressed, or lightly edited.
+
+1. Looks at photos (JPEG, PNG, HEIC, TIFF, GIF, BMP, WebP) in Pictures, Downloads, Desktop, Documents and Movies. Photo libraries, `node_modules`, icons (under 300 × 300 pixels) and tiny files are skipped. At most the 15,000 newest photos are examined.
+2. Makes a 9 × 8 grayscale miniature of each and builds a 64-bit **difference hash** (is each pixel brighter than its right neighbour?).
+3. Groups photos whose hashes differ in only a few bits.
+
+| Setting | Allows | Good for |
+|---|---|---|
+| Very close (4 bits) | resized or re-saved copies | the safest choice |
+| Similar (8 bits) | small edits, crops, other formats | everyday clean-up |
+| Loose (12 bits) | burst shots and look-alikes | review carefully |
+
+In each group the photo with the most pixels (then the biggest file) is marked **BEST** and kept. Tap any photo to keep that one instead; the others in the group go to the Trash. Photos are never read beyond a small thumbnail, and nothing leaves your Mac.
+
+## Similar Files
+
+Finds files that look like copies or versions of each other **by name**, without reading their contents. These names belong to the same family:
+
+`Report.pdf` · `Report (1).pdf` · `Report copy.pdf` · `Report - Copy 2.pdf` · `Report-2.pdf` · `Report_final_v3.pdf`
+
+The family key is the name in lower case with trailing copy and version markers removed, plus the extension. Each family shows size, folder and date, with the newest marked **NEWEST**. Because similar is not identical, **nothing is selected for you**; use *Select older versions* or tick files one by one. For byte-identical copies use the Duplicate finder.
+
 ## Space Lens
 
 Sizes of the folders and files inside the current folder, shown as bars. Click a folder to go deeper, right-click for *Show in Finder* or *Move to Trash*.
@@ -103,6 +127,19 @@ The screen also lists the busiest background programs that are not part of an ap
 
 Every item moved to the Trash by Sentinel is logged (type, name, size, time, original and Trash location). **Restore** moves it back when it is still in the Trash and the original folder exists. It never overwrites an existing file.
 
+## Automatic updates
+
+Sentinel can update itself from your GitHub Releases:
+
+1. About 8 seconds after launch, then once a day, it requests `https://api.github.com/repos/alfayedoficial/sentinel-mac/releases/latest`.
+2. If the release is newer than the running version, the Overview shows **Sentinel x.y.z is available** with **What's new** (the release notes) and **Update**.
+3. **Update** downloads `Sentinel.zip` and `Sentinel.zip.sha256` (only over HTTPS from GitHub's own hosts), then checks:
+   - the SHA-256 of the zip equals the published checksum;
+   - the unpacked app is Sentinel (`com.afapps.sentinel`), is **newer** than the running one, has a valid code signature and the same signing identity.
+4. It moves the running app aside (kept in `~/Library/Application Support/Sentinel/previous`), puts the new one in its place and restarts. If anything fails the old app stays untouched.
+
+Prereleases and drafts are ignored. If Sentinel is somewhere it cannot write, it tells you to download the update manually. The check can be switched off in **Settings → Check for updates automatically**.
+
 ## Settings
 
-Popup alerts on/off, weekly reminder, open at login, the idle / memory / CPU thresholds, the ignored apps list, and About.
+Popup alerts on/off, weekly reminder, automatic update check, open at login, the idle / memory / CPU thresholds, the ignored apps list, and About.
